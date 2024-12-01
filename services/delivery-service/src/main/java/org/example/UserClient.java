@@ -10,7 +10,7 @@ import java.util.List;
 public interface UserClient {
 
     @GetMapping("/api/users/{id}")
-    List<User> getUserById(@PathVariable Long id);
+    User getUserById(@PathVariable Long id);
 
 
 }

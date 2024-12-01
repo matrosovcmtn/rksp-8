@@ -5,25 +5,25 @@ metadata:
     kompose.cmd: kompose convert
     kompose.version: 1.34.0 (cbf2835db)
   labels:
-    io.kompose.service: load-balancer
-  name: load-balancer
+    io.kompose.service: user-service
+  name: user-service
 spec:
   replicas: 1
   selector:
     matchLabels:
-      io.kompose.service: load-balancer
+      io.kompose.service: user-service
   template:
     metadata:
       annotations:
         kompose.cmd: kompose convert
         kompose.version: 1.34.0 (cbf2835db)
       labels:
-        io.kompose.service: load-balancer
+        io.kompose.service: user-service
     spec:
       containers:
-        - image: localhost:5000/load-balancer
-          name: load-balancer
+        - image: p0pl3/user-service:latest
+          name: user-service
           ports:
-            - containerPort: 9000
+            - containerPort: 8080
               protocol: TCP
       restartPolicy: Always

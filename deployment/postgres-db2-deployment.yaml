@@ -27,9 +27,9 @@ spec:
             - name: POSTGRES_DB
               value: db2
             - name: POSTGRES_PASSWORD
-              value: password2
+              value: password
             - name: POSTGRES_USER
-              value: user2
+              value: postgres
           image: postgres:16-alpine3.19
           name: postgres-db2
           ports:

@@ -1,11 +1,9 @@
 package org.example;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -31,5 +29,15 @@ public class UserController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @PostMapping("/")
+    public ResponseEntity<User> createUser(@RequestParam("username") String username,
+                                           @RequestParam("password") String password) {
+        User newUser = User.builder()
+                .username(username)
+                .password(password)
+                .build();
+        return ResponseEntity.status(HttpStatus.CREATED).body(userRepository.save(newUser));
     }
 }

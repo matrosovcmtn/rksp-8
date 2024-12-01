@@ -5,12 +5,12 @@ metadata:
     kompose.cmd: kompose convert
     kompose.version: 1.34.0 (cbf2835db)
   labels:
-    io.kompose.service: user-fullname-service
-  name: user-fullname-service
+    io.kompose.service: pizza-service
+  name: pizza-service
 spec:
   ports:
     - name: http
       port: 8081
       targetPort: 8081
   selector:
-    io.kompose.service: user-fullname-service
+    io.kompose.service: pizza-service

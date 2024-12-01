@@ -1,9 +1,12 @@
 package org.example;
 
+import feign.FeignException;
+import jakarta.ws.rs.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.Optional;
 
@@ -17,10 +20,17 @@ public class DeliveryController {
     private final PizzaClient pizzaClient;
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Delivery>> getDelivery(@PathVariable("id") Long id) {
+    public ResponseEntity<DeliveryDTO> getDelivery(@PathVariable("id") Long id) {
         Optional<Delivery> delivery = deliveryRepository.findById(id);
         if (delivery.isPresent()) {
-            return ResponseEntity.ok(delivery);
+            Pizza pizza = pizzaClient.getPizzaById(delivery.get().getPizzaId());
+            User user = userClient.getUserById(delivery.get().getUserId());
+            DeliveryDTO deliveryDTO = DeliveryDTO.builder()
+                    .id(delivery.get().getId())
+                    .pizza(pizza)
+                    .user(user)
+                    .build();
+            return ResponseEntity.ok(deliveryDTO);
         } else {
             return ResponseEntity.notFound().build();
         }
@@ -28,8 +38,13 @@ public class DeliveryController {
 
     @PostMapping("/create")
     public ResponseEntity<Delivery> createDelivery(@RequestParam("pizzaId") Long pizzaId,
-                                           @RequestParam("userId") Long userId) {
-
+                                                   @RequestParam("userId") Long userId) {
+        try {
+            Pizza pizza = pizzaClient.getPizzaById(pizzaId);
+            User user = userClient.getUserById(userId);
+        } catch (NotFoundException ex) {
+            return ResponseEntity.badRequest().build();
+        }
 
         Delivery newDelivery = Delivery.builder()
                 .userId(userId)
@@ -37,6 +52,4 @@ public class DeliveryController {
                 .build();
         return ResponseEntity.status(HttpStatus.CREATED).body(deliveryRepository.save(newDelivery));
     }
-
-
 }

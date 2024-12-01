@@ -54,5 +54,5 @@ tasks.jar {
 }
 
 tasks.bootJar {
-    archiveBaseName.set("user-fullname-service")
+    archiveBaseName.set("pizza-service")
 }

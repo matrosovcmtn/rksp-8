@@ -1,18 +1,4 @@
-FROM gradle:8.7-jdk21-alpine as build
-
-ADD . /project
-WORKDIR /project
-
-# Черномуров Семён Андреевич ИКБО-10-21
-ARG JAR_FILE=api-gateway.jar
-RUN gradle build -x test
-
 FROM amazoncorretto:21.0.5-alpine
-
-ARG JAR_FILE=api-gateway.jar
 WORKDIR /app
-
-COPY --from=build /project/build/libs/$JAR_FILE /libs/
-COPY --from=build /project/build/resources /resources/
-
-CMD ["java", "-jar", "libs/api-gateway.jar"]
+COPY /build/libs/api-gateway.jar /app
+CMD ["java", "-jar", "api-gateway.jar"]

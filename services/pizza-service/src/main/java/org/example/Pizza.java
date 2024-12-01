@@ -19,4 +19,6 @@ public class Pizza {
     private Long id;
 
     private String name;
+    private int cost;
+
 }
