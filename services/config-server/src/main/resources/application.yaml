@@ -1,65 +1,20 @@
-spring.application.name: config-server
 server.port: 8888
-spring.cloud.config.server.git:
-  search-paths:
-    - cloud-configs
-  clone-on-start: true
-  default-label: master
-  private-key: |
-    -----BEGIN OPENSSH PRIVATE KEY-----
-    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
-    -----END OPENSSH PRIVATE KEY-----
-  uri: git@github.com:p0pl3/rksp_7sem_pr8.git
-  ignore-local-ssh-settings: true
-
-eureka.client.service-url.defaultZone: http://service-discovery:8761/eureka/
 spring:
+  application:
+    name: config-server
   cloud:
     config:
       enabled: false
+    config.server.git:
+      search-paths:
+        - cloud-configs
+      clone-on-start: true
+      default-label: main
+      uri: https://github.com/p0pl3/rksp_7sem_pr8.git
+      ignore-local-ssh-settings: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://service-discovery:8761/eureka/
+
