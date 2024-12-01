@@ -9,9 +9,6 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
-
-    @Id
-    @GeneratedValue
     private Long id;
 
     private String username;

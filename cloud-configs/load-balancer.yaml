@@ -3,6 +3,6 @@ server.port: 9000
 spring.cloud.loadbalancer.clients:
   user-service:
     instances:
-      - uri: http://user-service:8080
+      - uri: http://delivery-service:8082
 
 eureka.client.service-url.defaultZone: http://service-discovery:8761/eureka/

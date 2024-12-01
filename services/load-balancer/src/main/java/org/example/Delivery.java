@@ -1,21 +1,21 @@
 package org.example;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+
 
 @Builder
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserRole {
+public class Delivery {
 
     private Long id;
 
     private Long userId;
 
-    private String roleName;
+    private Long pizzaId;
 }

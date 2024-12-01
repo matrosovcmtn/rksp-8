@@ -1,7 +1,6 @@
 import org.example.User;
 import org.example.UserController;
 import org.example.UserRepository;
-import org.example.UserRole;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

@@ -35,11 +35,11 @@ spec:
           ports:
             - containerPort: 5432
               protocol: TCP
-          volumeMounts:
-            - mountPath: /var/lib/postgresql/data
-              name: db2-data
-      restartPolicy: Always
-      volumes:
-        - name: db2-data
-          persistentVolumeClaim:
-            claimName: db2-data
+#          volumeMounts:
+#            - mountPath: /var/lib/postgresql/data
+#              name: db2-data
+#      restartPolicy: Always
+#      volumes:
+#        - name: db2-data
+#          persistentVolumeClaim:
+#            claimName: db2-data
