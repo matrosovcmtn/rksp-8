@@ -1,17 +1,19 @@
-import org.example.User;
-import org.example.UserController;
-import org.example.UserRepository;
+package org.example;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.ResponseEntity;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class UserControllerTest {
@@ -22,28 +24,73 @@ public class UserControllerTest {
     @InjectMocks
     private UserController userController;
 
+    private User user1;
+    private User user2;
 
-    @Test
-    void getAllUsers() {
-        when(userRepository.findAll()).thenReturn(List.of(User.builder().id(1L).build()));
-
-        List<User> actualUsers = userController.getAllUsers();
-
-        assertThat(actualUsers).hasSize(1);
-        assertThat(actualUsers.getFirst().getId()).isEqualTo(1L);
+    @BeforeEach
+    void setUp() {
+        user1 = User.builder()
+                .id(1L)
+                .username("user1")
+                .password("password1")
+                .build();
+        user2 = User.builder()
+                .id(2L)
+                .username("user2")
+                .password("password2")
+                .build();
     }
 
     @Test
-    void getUserInfo() {
-        when(userFullnameClient.getUserFullname(anyLong()))
-                .thenReturn(UserFullname.builder().fullname("testFullName").build());
-        when(userRoleClient.getUserRole(anyLong()))
-                .thenReturn(UserRole.builder().roleName("ROLENAME").build());
+    void getAllUsers_shouldReturnListOfUsers() {
+        List<User> users = Arrays.asList(user1, user2);
+        when(userRepository.findAll()).thenReturn(users);
 
-        UserInfoDto actualInfo = userController.getUserInfo(1L);
+        ResponseEntity<List<User>> response = userController.getAllUsers();
 
-        assertThat(actualInfo).isNotNull();
-        assertThat(actualInfo.fullname().getFullname()).isEqualTo("testFullName");
-        assertThat(actualInfo.userRole().getRoleName()).isEqualTo("ROLENAME");
+        assertEquals(200, response.getStatusCodeValue());
+        assertNotNull(response.getBody());
+        assertEquals(2, response.getBody().size());
+        assertEquals("user1", response.getBody().get(0).getUsername());
+        verify(userRepository, times(1)).findAll();
+    }
+
+    @Test
+    void getUser_shouldReturnUser_whenUserExists() {
+        when(userRepository.findById(1L)).thenReturn(Optional.of(user1));
+
+        ResponseEntity<Optional<User>> response = userController.getUser(1L);
+
+        assertEquals(200, response.getStatusCodeValue());
+        assertTrue(response.getBody().isPresent());
+        assertEquals("user1", response.getBody().get().getUsername());
+        verify(userRepository, times(1)).findById(1L);
+    }
+
+    @Test
+    void getUser_shouldReturnNotFound_whenUserDoesNotExist() {
+        when(userRepository.findById(1L)).thenReturn(Optional.empty());
+
+        ResponseEntity<Optional<User>> response = userController.getUser(1L);
+
+        assertEquals(404, response.getStatusCodeValue());
+        verify(userRepository, times(1)).findById(1L);
+    }
+
+    @Test
+    void createUser_shouldReturnCreatedUser() {
+        User newUser = User.builder()
+                .id(3L)
+                .username("newUser")
+                .password("newPassword")
+                .build();
+        when(userRepository.save(any(User.class))).thenReturn(newUser);
+
+        ResponseEntity<User> response = userController.createUser("newUser", "newPassword");
+
+        assertEquals(201, response.getStatusCodeValue());
+        assertNotNull(response.getBody());
+        assertEquals("newUser", response.getBody().getUsername());
+        verify(userRepository, times(1)).save(any(User.class));
     }
 }
