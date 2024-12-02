@@ -1,7 +1,7 @@
 server.port: 9000
 
 spring.cloud.loadbalancer.clients:
-  user-service:
+  delivery-service:
     instances:
       - uri: http://delivery-service:8082
 

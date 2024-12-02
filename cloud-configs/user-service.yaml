@@ -9,4 +9,4 @@ spring:
     hibernate:
       ddl-auto: create
 
-delivery.service.url: http://delivery-service:8081
+delivery.service.url: http://delivery-service:8082
