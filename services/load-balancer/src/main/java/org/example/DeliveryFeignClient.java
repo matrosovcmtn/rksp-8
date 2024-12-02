@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
-@FeignClient(name = "delivery-service") // Совпадает с конфигами
+@FeignClient(name = "delivery-service", url = "${delivery.service.url}") // Совпадает с конфигами
 public interface DeliveryFeignClient {
 
     @GetMapping("/api/delivery/{id}")
