@@ -21,7 +21,7 @@ spec:
         io.kompose.service: service-discovery
     spec:
       containers:
-        - image: p0pl3/service-discovery:latest
+        - image: matrosovcmtn/service-discovery:latest
           name: service-discovery
           ports:
             - containerPort: 8761

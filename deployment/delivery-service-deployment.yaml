@@ -21,7 +21,7 @@ spec:
         io.kompose.service: delivery-service
     spec:
       containers:
-        - image: p0pl3/delivery-service:latest
+        - image: matrosovcmtn/delivery-service:latest
           name: delivery-service
           ports:
             - containerPort: 8082

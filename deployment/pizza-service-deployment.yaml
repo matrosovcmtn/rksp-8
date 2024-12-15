@@ -21,7 +21,7 @@ spec:
         io.kompose.service: pizza-service
     spec:
       containers:
-        - image: p0pl3/pizza-service:latest
+        - image: matrosovcmtn/pizza-service:latest
           name: pizza-service
           ports:
             - containerPort: 8081

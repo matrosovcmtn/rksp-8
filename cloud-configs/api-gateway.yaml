@@ -16,8 +16,8 @@ spring.cloud.gateway.routes:
 
 spring.security.oauth2.client:
   registration.github:
-    client-id: Ov23liTu8lwwzUAVTe89
-    client-secret: 2fb32c98ab314cfa10be2a746fbeb3dc9a5ebe3d
+    client-id: Ov23lizIb2VKNg5M7kW7
+    client-secret: b23bc5f65cb7b2b392b664a5a59455f2452296c4
     authorization-grant-type: authorization_code
     redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
     scope: read:user,user:email

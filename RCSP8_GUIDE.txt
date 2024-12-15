@@ -1,17 +1,17 @@
-docker build -t p0pl3/delivery-service:latest .\services\delivery-service
-docker push p0pl3/delivery-service:latest
-docker build -t p0pl3/user-service:latest .\services\user-service
-docker push p0pl3/user-service:latest
-docker build -t p0pl3/pizza-service:latest .\services\pizza-service
-docker push p0pl3/pizza-service:latest
-docker build -t p0pl3/api-gateway:latest .\services\api-gateway
-docker push p0pl3/api-gateway:latest
-docker build -t p0pl3/config-server:latest .\services\config-server
-docker push p0pl3/config-server:latest
-docker build -t p0pl3/load-balancer:latest .\services\load-balancer
-docker push p0pl3/load-balancer:latest
-docker build -t p0pl3/service-discovery:latest .\services\service-discovery
-docker push p0pl3/service-discovery:latest
+docker build -t matrosovcmtn/delivery-service:latest .\services\delivery-service
+docker push matrosovcmtn/delivery-service:latest
+docker build -t matrosovcmtn/user-service:latest .\services\user-service
+docker push matrosovcmtn/user-service:latest
+docker build -t matrosovcmtn/pizza-service:latest .\services\pizza-service
+docker push matrosovcmtn/pizza-service:latest
+docker build -t matrosovcmtn/api-gateway:latest .\services\api-gateway
+docker push matrosovcmtn/api-gateway:latest
+docker build -t matrosovcmtn/config-server:latest .\services\config-server
+docker push matrosovcmtn/config-server:latest
+docker build -t matrosovcmtn/load-balancer:latest .\services\load-balancer
+docker push matrosovcmtn/load-balancer:latest
+docker build -t matrosovcmtn/service-discovery:latest .\services\service-discovery
+docker push matrosovcmtn/service-discovery:latest
 
 -----------------------
 minikube start --memory=3600

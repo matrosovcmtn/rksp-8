@@ -21,7 +21,7 @@ spec:
         io.kompose.service: user-service
     spec:
       containers:
-        - image: p0pl3/user-service:latest
+        - image: matrosovcmtn/user-service:latest
           name: user-service
           ports:
             - containerPort: 8080

@@ -21,7 +21,7 @@ spec:
         io.kompose.service: load-balancer
     spec:
       containers:
-        - image: p0pl3/load-balancer:latest
+        - image: matrosovcmtn/load-balancer:latest
           name: load-balancer
           ports:
             - containerPort: 9000

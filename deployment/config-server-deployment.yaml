@@ -21,7 +21,7 @@ spec:
         io.kompose.service: config-server
     spec:
       containers:
-        - image: p0pl3/config-server:latest
+        - image: matrosovcmtn/config-server:latest
           name: config-server
           ports:
             - containerPort: 8888
